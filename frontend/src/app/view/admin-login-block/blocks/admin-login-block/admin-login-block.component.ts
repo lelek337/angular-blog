@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-login-block.component.scss']
 })
 export class AdminLoginBlockComponent implements OnInit {
-
+  serverError = '';
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onLogin(value: any) {
+    console.log('onLogin', value);
+    this.serverError += 'p';
   }
 
 }
