@@ -5,6 +5,7 @@ import { adminAuthReducer, ADMIN_AUTH_FEATURE_NAME } from './store/admin-auth.re
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { AdminAuthEffects } from './store/admin-aurh.effects';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -13,6 +14,11 @@ import { AdminAuthEffects } from './store/admin-aurh.effects';
   imports: [
     CommonModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: request => request as any
+      }
+    }),
     StoreModule.forFeature(
       ADMIN_AUTH_FEATURE_NAME,
       adminAuthReducer
