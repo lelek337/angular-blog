@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-login-form-ui',
@@ -9,6 +9,10 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class AdminLoginFormUiComponent implements OnInit {
   formGroup: FormGroup;
 
+  @Input() formError = '';
+  @Input() disabled = false;
+  @Output() login = new EventEmitter();
+
   constructor() {
     this.formGroup = new FormGroup({
       login: new FormControl('', [Validators.required]),
@@ -16,15 +20,7 @@ export class AdminLoginFormUiComponent implements OnInit {
     })
    }
 
-  @Input() formError = 'Foo';
-  @Output() login = new EventEmitter();
-
-  ngOnInit(): void {
-    // const formData = { //new FormGroup({})
-    //   login: '', //new FormControl(')
-    //   password: '', //new FormControl(')
-    // }
-  }
+  ngOnInit(): void {}
 
   onFormChange() {
     this.formError = '';
