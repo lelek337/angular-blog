@@ -3,26 +3,43 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AdminAuthService } from '../servises/admin-auth.service';
+import { catchError, EMPTY, first, flatMap, Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { getAccessToken } from '../store/admin-auth.selectors';
 
 @Injectable()
 export class AdminAuthInterceptor implements HttpInterceptor {
 
-  constructor(private adminAuthService: AdminAuthService) {}
+  constructor(
+    private store$: Store
+    ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // проверить наличие токена
-    if (this.adminAuthService.accessToken) {
-      // Если есть токен, то добавить заголовок `Bearer token`
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.adminAuthService.accessToken}`
-        }
-      });
-    }
-    return next.handle(request);
+    return this.store$.pipe(
+      select(getAccessToken),
+      first(),
+      flatMap(token => {
+        const authRequest = token ? request.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        }): request;
+
+        return next.handle(authRequest).pipe(
+          catchError(err => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status === 401) {
+                console.log('Redirect on login page Or side out');
+                return EMPTY;
+              }
+            }
+            throw err;
+          })
+        );
+      })
+    );
   }
 }
