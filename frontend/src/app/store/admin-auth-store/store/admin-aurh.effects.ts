@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { select, Store } from "@ngrx/store";
-import { catchError, delay, delayWhen, filter, first, map, of, switchMap, timer } from "rxjs";
+import { catchError, delay, delayWhen, filter, first, map, of, switchMap, tap, timer } from "rxjs";
 import { AdminAuthService } from "../servises/admin-auth.service";
-import { login, loginFailed, loginSuccess } from "./admin-auth.actions";
+import { initAdminAuth, login, loginFailed, loginSuccess, logoutSuccess } from "./admin-auth.actions";
 import { AuthData } from "./admin-auth.reducer";
 import { isAuth } from "./admin-auth.selectors";
 
@@ -41,6 +41,30 @@ export class AdminAuthEffects {
       map((loginSuccessData: AuthData) => loginSuccess(loginSuccessData))
     ))
   ));
+
+  saveAuthDataToLocalStorage$ = createEffect(() => this.actions$.pipe(
+    ofType(loginSuccess),
+    tap(loginSuccessData => {
+      const {type, ...authData} = loginSuccessData;
+
+      localStorage.setItem('authData', JSON.stringify(authData));
+    })
+  ), {dispatch: false});
+
+  extractLoginData$ = createEffect(() => this.actions$.pipe(
+    ofType(initAdminAuth),
+    map(() => {
+      const authDataString = localStorage.getItem('authData');
+      if (!authDataString) {
+        return logoutSuccess();
+      }
+      const authData: AuthData = JSON.parse(authDataString);
+      if ((authData.exp*1000 - 10 * 1000 - Date.now()) < 0) {
+        return logoutSuccess();
+      }
+      return loginSuccess(authData);
+    })
+  ))
 
   constructor(
     private actions$: Actions,
