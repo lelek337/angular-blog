@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,12 +17,20 @@ export class AdminLoginBlockComponent implements OnInit {
 
   serverError = '';
 
-  constructor(private store$: Store) { }
+  constructor(
+    private store$: Store,
+    private httpClient: HttpClient,
+    ) { }
 
   ngOnInit(): void {}
 
   onLogin(value: {login: string, password: string}) {
     this.store$.dispatch(login(value));
+  }
+
+  testProfile() {
+    this.httpClient.get('http://localhost:3000/auth/profile')
+    .subscribe(console.log);
   }
 
 }
