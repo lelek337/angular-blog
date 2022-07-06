@@ -27,14 +27,14 @@ import { initAdminAuth } from './store/admin-auth.actions';
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS, // Injection Token
       useClass: AdminAuthInterceptor, // класс интерсептора SPI
-      multi: true, // Мы внедряем массив
-    }
+      multi: true // мы внедряем массив
+    },
   ]
 })
 export class AdminAuthStoreModule {
   constructor(store$: Store) {
     store$.dispatch(initAdminAuth());
   }
- }
+}

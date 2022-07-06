@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NotFoundModule } from './routing/not-found/not-found.module';
-import { AdminModule } from './routing/admin/admin.module';
 import { AdminGuestGuard } from './guards/admin-guest.guard';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { StoreModule } from '@ngrx/store';

@@ -18,7 +18,7 @@ export class AdminLoginFormUiComponent implements OnInit {
       login: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     })
-   }
+  }
 
   ngOnInit(): void {}
 
@@ -27,7 +27,6 @@ export class AdminLoginFormUiComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Ui', this.formGroup.value);
     this.login.emit(this.formGroup.value);
   }
 
