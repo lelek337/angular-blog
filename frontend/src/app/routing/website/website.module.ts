@@ -6,8 +6,6 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { StoreModule } from '@ngrx/store';
 import { DEFAULT_ROUTER_FEATURENAME, routerReducer } from '@ngrx/router-store';
 
-
-
 @NgModule({
   declarations: [
   ],
@@ -40,7 +38,7 @@ import { DEFAULT_ROUTER_FEATURENAME, routerReducer } from '@ngrx/router-store';
         loadChildren: () => import('./routing/not-found/not-found.module')
         .then(module => module.NotFoundModule)
       }
-    ])
+    ]),
   ],
   providers: [AdminGuestGuard, AdminAuthGuard],
 })
