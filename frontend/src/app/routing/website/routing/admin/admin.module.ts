@@ -26,6 +26,24 @@ import { AdminHeaderBlockModule } from 'src/app/view/admin-header-block/admin-he
         .then(
           module => module.DashboardModule
           )
+      },
+      {
+        path: 'grid/:name/:entity',
+        component: AdminPageComponent,
+        loadChildren: () => import('./routing/grid/grid.module'
+        )
+        .then(
+          module => module.GridModule
+          )
+      },
+      {
+        path: 'form/:name/:entity',
+        component: AdminPageComponent,
+        loadChildren: () => import('./routing/form/form.module'
+        )
+        .then(
+          module => module.FormModule
+          )
       }
     ]),
     AdminFooterBlockModule,
