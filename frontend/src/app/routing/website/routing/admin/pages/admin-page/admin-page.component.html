@@ -1,9 +1,7 @@
 <div class="grid-container">
   <app-admin-header class="header"></app-admin-header>
-  <nav class="nav">
-    <a [routerLink]="'/admin/form/content/pages'">FORM</a>
-    <a [routerLink]="'/admin/grid/content/comment'">GRID</a>
-  </nav>
+  
+  <app-admin-nav class="nav"></app-admin-nav>
   <main class="main">
     <router-outlet></router-outlet>
   </main>
