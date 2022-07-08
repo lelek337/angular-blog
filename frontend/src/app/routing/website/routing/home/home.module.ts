@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
       {
         path: '',
         pathMatch: 'full',
-        component: HomePageComponent
+        component: HomePageComponent,
       },
     ])
   ]

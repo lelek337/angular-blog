@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { logout } from 'src/app/store/admin-auth-store/store/admin-auth.actions';
 
 @Component({
   selector: 'app-admin-header',
   templateUrl: './admin-header.component.html',
   styleUrls: ['./admin-header.component.scss']
 })
-export class AdminHeaderComponent implements OnInit {
+export class AdminHeaderComponent {
+  constructor(private store$: Store) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onLogout() {
+    this.store$.dispatch(logout())
   }
-
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, map, Observable } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthData } from '../store/admin-auth.reducer';
 import { select, Store } from '@ngrx/store';
@@ -12,12 +12,12 @@ import { getAuthData } from '../store/admin-auth.selectors';
 export class AdminAuthService {
   isAuth$ = this.store$.pipe(
     select(getAuthData),
-    filter(authData => authData !== undefined),
+    // filter(authData => authData !== undefined),
     map(authData => !!authData)
   );
 
   isGuest$ = this.isAuth$.pipe(
-    map(isAuth => !isAuth)
+    map(isAuth => !isAuth),
   );
 
   constructor(

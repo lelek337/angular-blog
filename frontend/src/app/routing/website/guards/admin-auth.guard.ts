@@ -3,9 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStat
 import { first, map, Observable } from 'rxjs';
 import { AdminAuthService } from 'src/app/store/admin-auth-store/servises/admin-auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdminAuthGuard implements CanActivate, CanLoad {
   constructor(
     private router: Router,
@@ -30,7 +28,7 @@ export class AdminAuthGuard implements CanActivate, CanLoad {
       first(),
       map(isAuth => {
         if (!isAuth) {
-          this.router.navigateByUrl('/admin/auth/login');
+          this.router.navigateByUrl('/admin/auth');
         }
         return isAuth;
       })

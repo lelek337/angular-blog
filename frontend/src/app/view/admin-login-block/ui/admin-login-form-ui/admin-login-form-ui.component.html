@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary"
-  [disabled]="disabled ||formGroup.invalid || !!formError">to come in</button>
+  [disabled]="disabled || formGroup.invalid || !!formError">to come in</button>
 </form>
 
 <mat-error *ngIf="formError">{{formError}}</mat-error>
