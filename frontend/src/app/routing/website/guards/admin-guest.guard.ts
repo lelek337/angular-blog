@@ -15,13 +15,11 @@ export class AdminGuestGuard implements CanActivate, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
     return !!this.getIsGuest();
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-
     return !!this.getIsGuest();
   }
   private getIsGuest(): Observable<boolean> {
@@ -32,7 +30,6 @@ export class AdminGuestGuard implements CanActivate, CanLoad {
         if (!isGuest) {
           this.router.navigateByUrl('/admin');
         }
-        console.log(isGuest)
         return isGuest;
       })
     )

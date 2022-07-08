@@ -20,7 +20,7 @@ import { DEFAULT_ROUTER_FEATURENAME, routerReducer } from '@ngrx/router-store';
         .then(module => module.HomeModule)
       },
       {
-        path: 'admin/auth',
+        path:  'admin/auth' || 'admin/**',
         loadChildren: () => import('./routing/admin-auth/admin-auth.module')
         .then(module => module.AdminAuthModule),
         canActivate: [AdminGuestGuard],
