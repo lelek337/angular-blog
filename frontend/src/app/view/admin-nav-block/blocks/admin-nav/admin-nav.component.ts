@@ -4,19 +4,49 @@ import { NestedTreeNode } from '../../models/nested-tree-node';
 
 const TREE_DATA: NestedTreeNode[] = [
   {
-    name: 'Fruit',
-    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
-  },
-  {
-    name: 'Vegetables',
+    name: 'Contents',
     children: [
       {
-        name: 'Green',
-        children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
+        name: 'Pages',
+        href: '/admin/grid/content/pages'
       },
       {
-        name: 'Orange',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
+        name: 'Posts',
+        href: '/admin/grid/content/post'
+      },
+      {
+        name: 'Comment',
+        href: '/admin/grid/content/comments'
+      }
+  ],
+  },
+  {
+    name: 'Accounts',
+    icon: 'perm_identity',
+    children: [
+      {
+        name: 'Admins',
+        icon: 'manage_accounts',
+        href: '/admin/grid/account/admins'
+      },
+      {
+        name: 'Users',
+        icon: 'face',
+        href: '/admin/grid/account/users'
+      },
+    ],
+  },
+  {
+    name: 'Settings',
+    icon: 'settings',
+    children: [
+      {
+        name: 'General',
+        href: '/admin/form/settings/general'
+      },
+      {
+        name: 'Catalog',
+        href: '/admin/form/settings/catalog'
       },
     ],
   },
