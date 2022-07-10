@@ -16,35 +16,38 @@ import { AdminNavBlockModule } from 'src/app/view/admin-nav-block/admin-nav-bloc
     RouterModule.forChild([
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard'
-      },
-      {
-        path: 'dashboard',
         component: AdminPageComponent,
-        loadChildren: () => import('./routing/dashboard/dashboard.module'
-        )
-        .then(
-          module => module.DashboardModule
-          )
-      },
-      {
-        path: 'grid/:name/:entity',
-        component: AdminPageComponent,
-        loadChildren: () => import('./routing/grid/grid.module'
-        )
-        .then(
-          module => module.GridModule
-          )
-      },
-      {
-        path: 'form/:name/:entity',
-        component: AdminPageComponent,
-        loadChildren: () => import('./routing/form/form.module'
-        )
-        .then(
-          module => module.FormModule
-          )
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'dashboard'
+          },
+          {
+            path: 'dashboard',
+            loadChildren: () => import('./routing/dashboard/dashboard.module'
+            )
+            .then(
+              module => module.DashboardModule
+              )
+          },
+          {
+            path: 'grid/:name/:entity',
+            loadChildren: () => import('./routing/grid/grid.module'
+            )
+            .then(
+              module => module.GridModule
+              )
+          },
+          {
+            path: 'form/:name/:entity',
+            loadChildren: () => import('./routing/form/form.module'
+            )
+            .then(
+              module => module.FormModule
+              )
+          }
+        ]
       }
     ]),
     AdminFooterBlockModule,
